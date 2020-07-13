@@ -1,18 +1,30 @@
 package hamming
 
-import "errors"
+import (
+	"errors"
+)
 
+/*
+Distance function compate two DNA sequences, and calculate "hamming distance".
+Function take two string value representing DNA sequences and return number of different characters that occured between this two strings.
+*/
 func Distance(a, b string) (int, error) {
-	if len(a) != len(b) {
-		return -1, errors.New("DNA sequences have different lenth.")
+	ra := []rune(a)
+	rb := []rune(b)
+
+	runeCount := len(ra)
+
+	if runeCount != len(rb) {
+		return 0, errors.New("dna sequences have different length")
 	}
 
-	var distance = 0
+	distance := 0
 
-	for i := 0; i < len(a); i++ {
-		if a[i] != b[i] {
+	for i := 0; i < runeCount; i++ {
+		if ra[i] != rb[i] {
 			distance++
 		}
 	}
+
 	return distance, nil
 }
