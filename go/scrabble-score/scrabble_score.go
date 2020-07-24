@@ -1,8 +1,6 @@
 package scrabble
 
-import (
-	"unicode"
-)
+import "strings"
 
 var (
 	scoremap = map[rune]int{
@@ -20,8 +18,8 @@ var (
 func Score(word string) int {
 	score := 0
 
-	for _, letter := range word {
-		score += scoremap[unicode.ToUpper(letter)]
+	for _, letter := range strings.ToUpper(word) {
+		score += scoremap[letter]
 	}
 	return score
 }
