@@ -1,7 +1,6 @@
 package anagram
 
 import (
-	"fmt"
 	"reflect"
 	"sort"
 	"strings"
@@ -15,7 +14,6 @@ func Detect(input string, candidates []string) []string {
 
 	sort.Strings(letters)
 
-	fmt.Println(input, letters)
 	for _, candidate := range candidates {
 		if strings.ToLower(input) == strings.ToLower(candidate) {
 			continue

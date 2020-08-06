@@ -1,14 +1,14 @@
 package diffsquares
 
 // SquareOfSum calculate pow or first n natural numbers
-func SquareOfSum(n int) (sqos int) {
+func SquareOfSum(n int) int {
 	sum := (n * (n + 1)) / 2
 
 	return sum * sum
 }
 
 // SumOfSquares calculate sum of first n natural numbers pow
-func SumOfSquares(n int) (sosq int) {
+func SumOfSquares(n int) int {
 	return (n * (n + 1) * (2*n + 1)) / 6
 }
 
