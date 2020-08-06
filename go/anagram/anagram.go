@@ -1,7 +1,6 @@
 package anagram
 
 import (
-	"reflect"
 	"sort"
 	"strings"
 )
@@ -10,21 +9,25 @@ import (
 func Detect(input string, candidates []string) []string {
 	result := make([]string, 0)
 
-	letters := strings.Split(strings.ToLower(input), "")
-
-	sort.Strings(letters)
+	inputlc := strings.ToLower(input)
+	letters := normalize(inputlc)
 
 	for _, candidate := range candidates {
-		if strings.ToLower(input) == strings.ToLower(candidate) {
+		candidatelc := strings.ToLower(candidate)
+		if inputlc == candidatelc {
 			continue
 		}
 
-		candidateLetters := strings.Split(strings.ToLower(candidate), "")
-		sort.Strings(candidateLetters)
-		if reflect.DeepEqual(letters, candidateLetters) {
+		if letters == normalize(candidatelc) {
 			result = append(result, candidate)
 		}
 	}
 
 	return result
+}
+
+func normalize(input string) string {
+	result := strings.Split(input, "")
+	sort.Strings(result)
+	return strings.Join(result, "")
 }
