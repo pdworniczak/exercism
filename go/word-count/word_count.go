@@ -9,32 +9,39 @@ import (
 type Frequency map[string]int
 
 // WordCount counts words in input
-func WordCount(input string) Frequency {
-	result := make(Frequency)
+func WordCount(input string) (result Frequency) {
+	result = make(Frequency)
 	rinput := []rune(strings.ToLower(input))
 
-	start := 0
-	for stop, r := range rinput {
+	stop, start := 0, 0
+	for nstop, r := range rinput {
+		stop = nstop
 		if isWhitemark(r) {
-			if r == '\'' && len(rinput) > stop+1 && unicode.IsLetter(rinput[stop+1]) {
-				continue
-			}
 			for ; start < len(rinput) && isWhitemark(rinput[start]); start++ {
 			}
+
 			if start < stop {
-				result[string(rinput[start:stop])]++
+				result[getKey(rinput, start, stop)]++
 				start = stop + 1
 			}
 		}
 	}
 
 	if len(rinput[start:]) > 0 {
-		result[string(rinput[start:])]++
+		result[getLastKey(rinput, start)]++
 	}
 
-	return result
+	return
 }
 
 func isWhitemark(r rune) bool {
-	return !unicode.IsLetter(r) && !unicode.IsNumber(r)
+	return !unicode.IsLetter(r) && !unicode.IsNumber(r) && r != '\''
+}
+
+func getKey(input []rune, start, stop int) string {
+	return strings.Trim(string(input[start:stop]), "'")
+}
+
+func getLastKey(input []rune, start int) string {
+	return strings.Trim(string(input[start:]), "'")
 }
