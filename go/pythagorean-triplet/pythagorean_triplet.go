@@ -1,15 +1,5 @@
 package pythagorean
 
-import (
-	"math"
-)
-
-type d struct {
-	sum      int
-	min, max int
-	triplet  Triplet
-}
-
 type Triplet struct {
 	a int
 	b int
@@ -24,7 +14,7 @@ func Sum(s int) []Triplet {
 	c := s - (a + b)
 
 	for {
-		if pow2(a)+pow2(b) == pow2(c) {
+		if a*a+b*b == c*c {
 			res = append(res, Triplet{a, b, c})
 		}
 
@@ -38,7 +28,7 @@ func Sum(s int) []Triplet {
 			b = a + 1
 			c = s - (a + b)
 
-			if a >= b || b >= c {
+			if b >= c {
 				break
 			}
 		}
@@ -55,7 +45,7 @@ func Range(min, max int) []Triplet {
 	for c := max; c >= min+2; c-- {
 		for b := c - 1; b >= min+1; b-- {
 			for a := b - 1; a >= min; a-- {
-				if pow2(a)+pow2(b) == pow2(c) {
+				if a*a+b*b == c*c {
 					res = append([]Triplet{{a, b, c}}, res...)
 				}
 			}
@@ -63,8 +53,4 @@ func Range(min, max int) []Triplet {
 	}
 
 	return res
-}
-
-func pow2(x int) int {
-	return int(math.Pow(float64(x), 2))
 }
