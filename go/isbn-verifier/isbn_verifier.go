@@ -6,9 +6,7 @@ func IsValidISBN(isbn string) bool {
 	i := 0
 
 	for _, mark := range isbn {
-		if i > 9 {
-			return false
-		} else if mark >= '0' && mark <= '9' {
+		if mark >= '0' && mark <= '9' {
 			sum += (int(mark) - '0') * (10 - i)
 			i++
 		} else if mark == 'x' || mark == 'X' {
@@ -20,8 +18,6 @@ func IsValidISBN(isbn string) bool {
 			}
 		} else if mark == '-' {
 			continue
-		} else {
-			return false
 		}
 
 	}
