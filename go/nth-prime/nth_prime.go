@@ -13,7 +13,7 @@ func Nth(n int) (int, bool) {
 	prime := 2
 	primesCount := 0
 
-	for i := prime; primesCount < n; {
+	for i := 2; primesCount < n; {
 		if isPrime(i) {
 			primesCount++
 			prime = i
