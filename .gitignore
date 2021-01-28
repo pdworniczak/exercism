@@ -3,3 +3,5 @@ README.md
 go.mod
 .exercism
 .vscode
+go.code*
+.idea
